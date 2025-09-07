@@ -39,7 +39,7 @@
 - **📖 播放历史**：自动记录观看历史，快速找回看过的内容
 - **👥 多用户支持**：独立的用户系统，每个用户独享个人数据
 - **🔄 数据同步**：支持多种存储后端（LocalStorage、Redis、D1、Upstash）
-- **🔒 内容过滤**：智能成人内容过滤系统，默认开启安全保护
+- **🔒 内容过滤**：智能**内容过滤系统，默认开启安全保护
 
 ### 🚀 部署特性
 
@@ -55,7 +55,7 @@
 
 ### 💡 方案选择指南
 
-| 使用场景     | 推荐方案         | 存储类型     | 成人内容过滤 | 多用户 | 部署难度 |
+| 使用场景     | 推荐方案         | 存储类型     | **内容过滤 | 多用户 | 部署难度 |
 | ------------ | ---------------- | ------------ | ------------ | ------ | -------- |
 | **个人使用** | Docker 单容器    | localstorage | ❌           | ❌     | ⭐       |
 | **家庭使用** | Docker + Redis   | redis        | ✅           | ✅     | ⭐⭐     |
@@ -63,7 +63,7 @@
 | **生产环境** | Docker + Kvrocks | kvrocks      | ✅           | ✅     | ⭐⭐     |
 | **全球加速** | Cloudflare Pages | d1           | ✅           | ✅     | ⭐⭐⭐⭐ |
 
-> 💡 **重要提示**：成人内容过滤功能需要数据库存储支持，不支持 `localstorage` 方式
+> 💡 **重要提示**：**内容过滤功能需要数据库存储支持，不支持 `localstorage` 方式
 
 ---
 
@@ -96,7 +96,7 @@ docker run -d \
 
 ### 方案二：Docker + Redis（推荐家庭使用）
 
-**特点**：完整功能，多用户支持，成人内容过滤
+**特点**：完整功能，多用户支持，**内容过滤
 
 ```bash
 # 1. 下载配置文件
@@ -310,12 +310,6 @@ curl -H "Authorization: Bearer $UPSTASH_TOKEN" \
 
 > \*多用户部署必填 \*\*对应存储类型必填
 
-### 视频源配置
-
-#### 推荐配置文件
-
-- **基础版**（20+站点）：[config_isadult.json](https://www.mediafire.com/file/upztrjc0g1ynbzy/config_isadult.json/file)
-- **增强版**（94 站点）：[configplus_isadult.json](https://www.mediafire.com/file/ff60ynj6z21iqfb/configplus_isadult.json/file)
 
 #### 配置方式
 
@@ -342,18 +336,18 @@ curl -H "Authorization: Bearer $UPSTASH_TOKEN" \
 
 ## 📱 高级功能使用指南
 
-### 🔒 成人内容过滤
+### 🔒 **内容过滤
 
 **功能介绍**：
 
-- 智能识别和过滤成人内容资源站
+- 智能识别和过滤**内容资源站
 - 用户可自主选择开启或关闭过滤功能
 - 默认开启过滤，确保安全浏览体验
 - 支持资源分组显示，避免误触
 
 **⚠️ 重要部署要求**：
 
-成人内容过滤功能需要服务器端存储支持，**不能使用 `localstorage` 存储类型**。
+**内容过滤功能需要服务器端存储支持，**不能使用 `localstorage` 存储类型**。
 
 | 部署平台         | 推荐存储类型        | 配置要求                  |
 | ---------------- | ------------------- | ------------------------- |
@@ -363,7 +357,7 @@ curl -H "Authorization: Bearer $UPSTASH_TOKEN" \
 
 **Cloudflare Pages 特殊配置**：
 
-如果你使用 Cloudflare Pages 部署，**必须配置 D1 数据库**才能使用成人内容过滤功能：
+如果你使用 Cloudflare Pages 部署，**必须配置 D1 数据库**才能使用**内容过滤功能：
 
 1. **创建 D1 数据库**：
 
@@ -411,13 +405,13 @@ curl -H "Authorization: Bearer $UPSTASH_TOKEN" \
 
 2. **配置过滤选项**：
 
-   - 在「内容过滤」部分找到「成人内容过滤」开关
-   - **开启**：完全隐藏成人内容资源站和搜索结果
-   - **关闭**：成人内容在搜索结果中单独分组显示
+   - 在「内容过滤」部分找到「**内容过滤」开关
+   - **开启**：完全隐藏**内容资源站和搜索结果
+   - **关闭**：**内容在搜索结果中单独分组显示
 
 3. **搜索结果展示**：
    - **过滤开启时**：只显示常规内容
-   - **过滤关闭时**：显示两个标签页「常规结果」和「成人内容」
+   - **过滤关闭时**：显示两个标签页「常规结果」和「**内容」
 
 **配置文件格式**：
 
@@ -432,8 +426,8 @@ curl -H "Authorization: Bearer $UPSTASH_TOKEN" \
     },
     "adult_site": {
       "api": "https://adult.example.com/api.php/provide/vod",
-      "name": "成人内容站",
-      "is_adult": true // 标记为成人内容
+      "name": "**内容站",
+      "is_adult": true // 标记为**内容
     }
   }
 }
@@ -441,13 +435,13 @@ curl -H "Authorization: Bearer $UPSTASH_TOKEN" \
 
 **安全提示**：
 
-- 默认情况下，所有新用户和未登录用户的成人内容过滤均为开启状态
+- 默认情况下，所有新用户和未登录用户的**内容过滤均为开启状态
 - 关闭过滤功能需要用户主动操作，确保使用意图明确
 - 建议管理员在配置资源站时准确标记 `is_adult` 字段
 
 **详细配置指南**：
 
-- 📖 [Cloudflare Pages 成人内容过滤配置指南](./CLOUDFLARE_PAGES_ADULT_FILTER.md)
+- 📖 [Cloudflare Pages **内容过滤配置指南](./CLOUDFLARE_PAGES_ADULT_FILTER.md)
 - 🗄️ [D1 数据库迁移说明](./D1_MIGRATION.md)
 
 ### 🎯 跳过片头片尾
@@ -577,13 +571,11 @@ GET /api/admin/analytics
 }
 ```
 
-- 下载：[configplus_isadult.json](https://www.mediafire.com/file/ff60ynj6z21iqfb/configplus_isadult.json/file)
+- 下载
 - 重命名为 config.json 使用
 
 1. 下载配置文件：
 
-   - [基础版 config_isadult.json](https://www.mediafire.com/file/upztrjc0g1ynbzy/config_isadult.json/file)
-   - [Plus 版（94 个片源）](https://www.mediafire.com/file/ff60ynj6z21iqfb/configplus_isadult.json/file)
 
 2. 配置方式：
    - **Docker**：挂载配置文件 `-v ./config.json:/app/config.json:ro`
